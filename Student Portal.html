@@ -30,7 +30,7 @@
         const students = {
             "Ayla.elkhamisy.dam@bristol.com": "Ayla",
             "Sedra.elkhamisy.dam@bristol.com": "Sedra",
-            "Omar.elkhamisy.dam@nes.moe.edu.eg": "Omar"
+            "Omar.elkhamisy.dam@nes.moe.edu.eg": "Omar",
         };
 
         // Function to display student dashboard
@@ -73,16 +73,24 @@
             });
         }
 
-        // Ask for email and show the correct dashboard
-        const userEmail = prompt("Enter your email:");
-        if (userEmail in students) {
-            showStudentDashboard(students[userEmail], userEmail);
-        } else {
-            document.body.innerHTML = "<h1 class='text-center text-2xl text-red-500'>Access Denied</h1>";
+        // Function to handle login
+        window.login = function() {
+            const userEmail = document.getElementById('user-email').value;
+            if (userEmail in students) {
+                document.getElementById('login-form').classList.add('hidden');
+                showStudentDashboard(students[userEmail], userEmail);
+            } else {
+                alert("Access Denied");
+            }
         }
     </script>
 </head>
 <body class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+    <div id="login-form" class="text-center p-6 bg-white shadow-lg rounded-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-4">Student Portal Login</h1>
+        <input type="email" id="user-email" placeholder="Enter your email" class="border p-2 w-full mb-4">
+        <button onclick="login()" class="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
+    </div>
     <div id="student-dashboard" class="hidden text-center p-6 bg-white shadow-lg rounded-lg w-full max-w-md">
         <h1 class="text-2xl font-bold mb-4">Welcome, <span id="student-name"></span></h1>
         <h2 class="text-lg font-semibold">Your Grades:</h2>
