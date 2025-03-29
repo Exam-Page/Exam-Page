@@ -31,7 +31,8 @@
             "Ayla.elkhamisy.dam@bristol.com": "Ayla",
             "Sedra.elkhamisy.dam@bristol.com": "Sedra",
             "Omar.elkhamisy.dam@nes.moe.edu.eg": "Omar",
-        };
+            "Dareen.elkhamisy.dam@bristol.com": "Dareen",
+        }
 
         // Function to display student dashboard
         function showStudentDashboard(studentName, studentEmail) {
@@ -53,12 +54,18 @@
             if (querySnapshot.empty) {
                 gradesList.innerHTML = "<p>No grades found.</p>";
             } else {
+                console.log("Grades found for:", studentEmail);
                 querySnapshot.forEach(doc => {
                     const data = doc.data();
-                    const listItem = document.createElement("li");
-                    listItem.textContent = `Grade and Subject: ${data.grade}, ${data.subject}`;
-                    listItem.classList.add("border-b", "py-2");
-                    gradesList.appendChild(listItem);
+                    console.log("Grade data:", data);
+                    const grade = data.grade;
+                    const subject = data.subject;
+                    if (grade && subject) {
+                        const listItem = document.createElement("li");
+                        listItem.textContent = `Grade and Subject: ${grade}, ${subject}`;
+                        listItem.classList.add("border-b", "py-2");
+                        gradesList.appendChild(listItem);
+                    }
                 });
             }
         }
